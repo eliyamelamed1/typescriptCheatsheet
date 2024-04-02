@@ -36,7 +36,7 @@ type TransformApiService2<Schemas> = {
       'req' extends keyof Schemas[Method][Endpoint] 
         ? (reqParams: InferZodSchema<Schemas[Method][Endpoint]['req']>, opt?: Record<string, unknown>) => {
             queryKey: any[],
-            queryFn: (params: InferZodSchema<Schemas[Method][Endpoint]['req']>) => Promise<InferZodSchema<Schemas[Method][Endpoint]['res']>>
+            queryFn: () => Promise<InferZodSchema<Schemas[Method][Endpoint]['res']>>
           }
         : (opt?: Record<string, unknown>) => {
             queryKey: any[],
