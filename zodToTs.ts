@@ -1,8 +1,8 @@
-import { unknown, z } from "zod";
+import { z } from "zod";
 
 const ApiSchemas = {
   get: {
-    STONES: {
+    ARTICLES: {
       req: z.object({
         sendIt: z.number()
       }),
@@ -12,7 +12,7 @@ const ApiSchemas = {
     }
   },
   post: {
-    NOW: {
+    SHARE: {
       req: z.object({
         sendIt: z.boolean()
       }),
@@ -20,7 +20,7 @@ const ApiSchemas = {
         sendIt: z.boolean()
       }),
     },
-    NOW2: {
+    LIKE: {
       res: z.object({
         sendIt: z.boolean()
       }),
@@ -47,24 +47,24 @@ type $ApiService2Schemas = TransformApiService2<typeof ApiSchemas>;
 
 const ApiService2: $ApiService2Schemas = {
   get: {
-    STONES: ({ sendIt }) => ({
-      queryKey: ['asd',23],
+    ARTICLES: ({ sendIt }) => ({
+      queryKey: ['get', 'ARTICLES', sendIt],
       queryFn: () => Promise.resolve({sendIt: sendIt.toString()}), 
     })
   },
   post: {
-    NOW: ({ sendIt }) =>({
-      queryKey: ['asd',23],
-      queryFn: () => Promise.resolve({sendIt: !sendIt}), 
+    SHARE: ({ sendIt }) =>({
+      queryKey: ['post', 'SHARE', sendIt],
+      queryFn: () => Promise.resolve({ sendIt: !sendIt }), 
     }),
-    NOW2: () =>({
-      queryKey: ['asd',23],
-      queryFn: () => Promise.resolve({sendIt: true}), 
+    LIKE: () =>({
+      queryKey: ['post', 'LIKE'],
+      queryFn: () => Promise.resolve({ sendIt: true }), 
     })
   }
 };
 
-ApiService2.get.STONES({sendIt:23}).queryFn({sendIt: 2})
+ApiService2.get.ARTICLES({ sendIt:23 }).queryFn({ sendIt: 2 })
 
 
 
