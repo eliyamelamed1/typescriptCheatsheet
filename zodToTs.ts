@@ -64,7 +64,7 @@ const ApiService2: $ApiService2Schemas = {
   }
 };
 
-ApiService2.get.ARTICLES({ sendIt:23 }).queryFn({ sendIt: 2 })
+ApiService2.get.ARTICLES({ sendIt:23 }).queryFn()
 
 
 
